@@ -40,22 +40,31 @@ class LibraryCLI:
         print(f"Finish Date: {book.finish_date}")
 
     def add_book(self) -> None:
-        """Add a new book to the library."""
 
-        title = input("Enter book title: ").strip()
-        author = input("Enter author name: ").strip()
-        genre = input("Enter book genre: ").strip()
+      title = input("Enter book title: ").strip()
+      author = input("Enter author name: ").strip()
+      genre = input("Enter book genre: ").strip()
 
-        try:
-            total_pages = int(input("Enter total pages: "))
+      try:
+          if not title or title.isdigit():
+              
+            raise ValueError("Book title cannot be empty or only numbers.")
 
-            book = Book(title, author, genre, total_pages)
-            self.library.add_book(book)
+          if not author or author.isdigit():
+            raise ValueError("Author name cannot be empty or only numbers.")
 
-            print("Book added successfully!")
+          if not genre or genre.isdigit():
+            raise ValueError("Genre cannot be empty or only numbers.")
 
-        except ValueError as error:
-            print(f"Error: {error}")
+          total_pages = int(input("Enter total pages: "))
+
+          book = Book(title, author, genre, total_pages)
+          self.library.add_book(book)
+
+          print("Book added successfully!")
+
+      except ValueError as error:
+        print(f"Error: {error}")
 
     def view_all_books(self) -> None:
         """Display all books in the library."""
